@@ -1,4 +1,3 @@
-const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -16,10 +15,6 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
- }
 
 // DB Config
 const db = require("./config/keys").mongoURI;
@@ -40,11 +35,11 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.use("/api/users", users);
+app.use("/api/v1/users", users);
 app.use("/api/v1/games", games);
 
 app.use("*", (req, res) =>
- res.sendFile(path.join(__dirname, "../client/build/index.html"))
+ res.sendStatus(404)
 );
 
 const port = process.env.PORT || 5000;
