@@ -5,6 +5,7 @@ const passport = require("passport");
 
 const users = require("./routes/api/users");
 const games = require("./routes/api/games");
+const HighScores = require("./routes/api/high-scores");
 
 const app = express();
 
@@ -52,6 +53,8 @@ app.post("/api/v1/high-scores", (req, res) => {
 
 app.use("/api/v1/users", users);
 app.use("/api/v1/games", games);
+app.use("/api/v1/high-scores", HighScores);
+
 
 //app.use("*", (req, res) => res.sendStatus(404));
 
