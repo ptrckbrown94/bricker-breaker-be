@@ -44,14 +44,16 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.get("/ping",(req, res) => res.sendStatus(200));
+app.post("/ping",(req, res) => res.sendStatus(200));
+app.post("/api/v1/high-scores", (req, res) => {
+  console.log("working")
+    res.json(req.body)
+});
 
 app.use("/api/v1/users", users);
 app.use("/api/v1/games", games);
 
-app.use("*", (req, res) =>
- res.sendStatus(404)
-);
+//app.use("*", (req, res) => res.sendStatus(404));
 
 const port = process.env.PORT || 5000;
 
