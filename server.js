@@ -16,6 +16,15 @@ app.use(
 );
 app.use(bodyParser.json());
 
+// ALLOW CORS
+const allowCrossDomain = function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+};
+app.use(allowCrossDomain);
+
 // DB Config
 const db = require("./config/keys").mongoURI;
 
@@ -35,6 +44,8 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
+app.get("/ping",(req, res) => res.sendStatus(200));
+
 app.use("/api/v1/users", users);
 app.use("/api/v1/games", games);
 
