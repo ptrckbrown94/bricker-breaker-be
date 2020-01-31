@@ -46,10 +46,7 @@ require("./config/passport")(passport);
 
 // Routes
 app.post("/ping",(req, res) => res.sendStatus(200));
-app.post("/api/v1/high-scores", (req, res) => {
-  console.log("working")
-    res.json(req.body)
-});
+
 
 app.use("/api/v1/users", users);
 app.use("/api/v1/games", games);
